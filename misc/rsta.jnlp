@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jnlp spec="1.0+" codebase="http://kylecordes.com/rsta/" href="rsta.jnlp">
+	<information>
+		<title>Rhino Swing Test App</title>
+		<vendor>Kyle Cordes</vendor>
+		<homepage href="http://kylecordes.com" />
+		<description></description>
+		<icon href="icon64.jpg" width="64" height="64" />
+		<offline-allowed />
+	</information>
+	<security>
+		<all-permissions />
+	</security>
+	<resources>
+		<j2se version="1.6+" initial-heap-size="64M" max-heap-size="512M" />
+		<jar href="js.jar" />
+		<jar href="rsta.jar" />
+	</resources>
+	<application-desc main-class="org.mozilla.javascript.tools.shell.Main">
+    <argument>-strict</argument>
+    <argument>jar:file:rsta.jar!/application.js</argument>
+	</application-desc>
+</jnlp>

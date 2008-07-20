@@ -1,0 +1,8 @@
+.metadata
+bin/*
+*.class
+*~
+*.bak
+*.swp
+dist
+build

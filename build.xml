@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!--
+  Rhino Swing Test App
+  Ant Build Spec
+-->
+<project name="rsta" default="dist" basedir=".">
+
+	<property file="build.properties" />
+
+	<path id="cp.all">
+		<fileset dir="lib" includes="*.jar" />
+	</path>
+
+	<target name="clean">
+		<delete dir="dist" quiet="true" />
+	</target>
+
+	<target name="init">
+		<mkdir dir="dist/web" />
+		<mkdir dir="dist/install" />
+	</target>
+
+	<target name="jar" depends="init">
+		<delete>
+			<fileset dir="dist" includes="**/rsta.jar" />
+		</delete>
+
+		<jar destfile="dist/install/rsta.jar" compress="true">
+			<fileset dir="js" includes="*.js" />
+			<!--
+			<manifest>
+				<attribute name="Main-Class" value="Runner" />
+				<attribute name="Class-Path" value="js.jar" />
+			</manifest>
+			-->
+		</jar>
+	</target>
+
+	<target name="dist" depends="jar">
+		<echo file="dist/install/rsta.bat" message="@start javaw -jar js.jar -strict jar:file:rsta.jar!/application.js" />
+
+		<copy todir="dist/install">
+			<fileset dir="lib" includes="*.jar" />
+		</copy>
+
+		<copy todir="dist/web">
+			<fileset dir="lib" includes="*.jar" />
+			<fileset dir="misc" includes="*.jnlp" />
+			<fileset dir="misc" includes="*.html" />
+			<fileset dir="dist/install" includes="rsta.jar" />
+		</copy>
+
+		<signjar keystore="misc/testkeys" alias="mykey" storepass="kcod72">
+			<fileset dir="dist/web" includes="*.jar" />
+		</signjar>
+	</target>
+
+</project>
