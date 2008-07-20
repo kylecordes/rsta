@@ -16,28 +16,34 @@
 	</target>
 
 	<target name="init">
+		<mkdir dir="dist/classes" />
 		<mkdir dir="dist/web" />
 		<mkdir dir="dist/install" />
 	</target>
 
-	<target name="jar" depends="init">
+	<target name="compile" depends="init">
+		<javac destdir="dist/classes" optimize="true" source="1.6" target="1.6" classpathref="cp.all">
+			<src path="src" />
+		</javac>
+	</target>
+
+	<target name="jar" depends="compile">
 		<delete>
 			<fileset dir="dist" includes="**/rsta.jar" />
 		</delete>
 
 		<jar destfile="dist/install/rsta.jar" compress="true">
+			<fileset dir="dist/classes" />
 			<fileset dir="js" includes="*.js" />
-			<!--
 			<manifest>
 				<attribute name="Main-Class" value="Runner" />
 				<attribute name="Class-Path" value="js.jar" />
 			</manifest>
-			-->
 		</jar>
 	</target>
 
 	<target name="dist" depends="jar">
-		<echo file="dist/install/rsta.bat" message="@start javaw -jar js.jar -strict jar:file:rsta.jar!/application.js" />
+		<echo file="dist/install/rsta.bat" message="@start javaw -jar rsta.jar" />
 
 		<copy todir="dist/install">
 			<fileset dir="lib" includes="*.jar" />

@@ -13,11 +13,8 @@
 	</security>
 	<resources>
 		<j2se version="1.6+" initial-heap-size="64M" max-heap-size="512M" />
-		<jar href="js.jar" />
 		<jar href="rsta.jar" />
+		<jar href="js.jar" />
 	</resources>
-	<application-desc main-class="org.mozilla.javascript.tools.shell.Main">
-    <argument>-strict</argument>
-    <argument>jar:file:rsta.jar!/application.js</argument>
-	</application-desc>
+	<application-desc main-class="Runner" />
 </jnlp>
