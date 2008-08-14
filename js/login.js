@@ -2,15 +2,12 @@ var layeredPane = new JLayeredPane();
 var dialog = new JDialog();
 var loggedIn = false;
 
-function go() {
-	dialog.dispose();
-	loggedIn = true;
-}
+importClass(com.kylecordes.rhinohack.RhinoAction);
 
-var okAction = new AbstractAction({
-	//super("Log In", null);    // There is no way to do this in Rhino. Sorry.
-	actionPerformed: function () {
-		go();
+var okAction = new JavaAdapter(RhinoAction, {
+	act : function(e) {
+		loggedIn = true;
+		dialog.dispose();
 	}
 });
 
