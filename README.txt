@@ -14,4 +14,3 @@ To get Eclipse support for JS editing, either download the JEE
 Eclipse package, or download the (much smaller) Java Eclipse package
 then use the Eclipse update mechanism to add the in the JSDT from
 the WTP.
-

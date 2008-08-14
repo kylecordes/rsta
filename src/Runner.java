@@ -14,10 +14,11 @@ import org.mozilla.javascript.ScriptableObject;
 import org.mozilla.javascript.WrappedException;
 
 public class Runner extends ScriptableObject {
-	
+
 	private static final long serialVersionUID = -3177482493159110328L;
 	private Scriptable topLevelScope;
-	
+
+	@Override
 	public String getClassName() {
 		return "global";
 	}
@@ -26,16 +27,33 @@ public class Runner extends ScriptableObject {
 		new Runner().go(args);
 	}
 
+	static class MyContextFactory extends ContextFactory {
+		@Override
+		protected boolean hasFeature(Context cx, int featureIndex) {
+			switch (featureIndex) {
+			case Context.FEATURE_STRICT_MODE:
+			case Context.FEATURE_STRICT_VARS:
+			case Context.FEATURE_STRICT_EVAL:
+			case Context.FEATURE_WARNING_AS_ERROR:
+				return true;
+			}
+			return super.hasFeature(cx, featureIndex);
+		}
+	};
+
+	Context mainContext;
+
 	private void go(String args[]) {
-		Context cx = new ContextFactory().enterContext();
+		ContextFactory contextFactory = new MyContextFactory();
+		mainContext = contextFactory.enterContext();
 		try {
-			cx.setLanguageVersion(170); // This is the latest, as of July 2008.
+			mainContext.setLanguageVersion(170); // This is the latest, as of July 2008.
 
 			// publish a subset of what the "Shell" offers
 			String[] names = { "print", "load" };
 			defineFunctionProperties(names, Runner.class,
 					ScriptableObject.DONTENUM);
-			
+
 			// Publish command line args, might be useful for JWS launching
 			Object[] array;
 			if (args.length == 0) {
@@ -45,18 +63,18 @@ public class Runner extends ScriptableObject {
 				array = new Object[length];
 				System.arraycopy(args, 1, array, 0, length);
 			}
-			Scriptable argsObj = cx.newArray(this, array);
+			Scriptable argsObj = mainContext.newArray(this, array);
 			defineProperty("arguments", argsObj, ScriptableObject.DONTENUM);
 
 			String launchJS = "launch.js";
 			if (args.length > 0) {
 				launchJS = args[0];
 			}
-			
-			topLevelScope = new ImporterTopLevel(cx);
+
+			topLevelScope = new ImporterTopLevel(mainContext);
 			topLevelScope.put("intf", topLevelScope, this);
 
-			processSource(cx, launchJS);
+			processSource(mainContext, launchJS);
 		} finally {
 			Context.exit();
 		}
@@ -111,14 +129,20 @@ public class Runner extends ScriptableObject {
 		try {
 			cx.evaluateReader(topLevelScope, in, filename, 1, null);
 		} catch (WrappedException we) {
+			System.err.println("WrappedException, containing:");
 			System.err.println(we.getWrappedException().toString());
 			we.printStackTrace();
 		} catch (EvaluatorException ee) {
 			System.err.println("js: " + ee.getMessage());
+			//ee.printStackTrace();
 		} catch (JavaScriptException jse) {
 			System.err.println("js: " + jse.getMessage());
 		} catch (IOException ioe) {
 			System.err.println(ioe.toString());
+		} catch (Exception e) {
+			System.err.println("Other Exception: " + e.toString());
+			//e.printStackTrace();
+
 		} finally {
 			try {
 				in.close();

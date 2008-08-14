@@ -17,36 +17,3 @@ reload while running
 
 
 
-
-
-
-Global setup:
-
-  git config --global user.email kyle@kylecordes.com
-      
-
-Next steps:
-
-  mkdir rsta
-  cd rsta
-  git init
-  touch README
-  git add README
-  git commit -m 'first commit'
-  git remote add origin git@github.com:kylecordes/rsta.git
-  git push origin master
-      
-
-Existing Git Repo?
-
-  cd existing_git_repo
-  git remote add origin git@github.com:kylecordes/rsta.git
-  git push origin master
-      
-
-When you're done:
-
-  Continue
-
-
-

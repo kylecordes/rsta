@@ -34,7 +34,7 @@
 
 		<jar destfile="dist/install/rsta.jar" compress="true">
 			<fileset dir="dist/classes" />
-			<fileset dir="js" includes="*.js" />
+			<fileset dir="js" includes="*" />
 			<manifest>
 				<attribute name="Main-Class" value="Runner" />
 				<attribute name="Class-Path" value="js.jar" />
