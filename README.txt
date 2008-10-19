@@ -1,6 +1,8 @@
-Rhino Swing Test App
+Rhino Swing Test Application
+Proof of concept: it is possible to create a rich Swing application
+writing code 99% in Javascript.
 
-Kyle Cordes
+Copyright 2008 Kyle Cordes
 http://kylecordes.com
 
 Run it online: http://kylecordes.com/rsta/

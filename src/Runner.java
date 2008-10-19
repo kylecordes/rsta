@@ -1,3 +1,11 @@
+/* Rhino Swing Test Application
+ * Kyle Cordes
+ * http://kylecordes.com
+ *
+ * This fine is an attempt at a fairly minimal Java launchpad for
+ * an application written as much as possible with Rhino / Javascript.
+ */
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;

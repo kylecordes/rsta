@@ -1,7 +1,10 @@
+// Rhino Swing Test Application
+// Copyright 2008 Kyle Cordes
+// http://kylecordes.com
 
 function runApp() {
 	
-	var lframe = new JFrame("Congrats you are logged in!");
+	var lframe = new JFrame("Rhine Swing Test Application - Main Screen");
 	lframe.setSize(500, 300);
 
 	lframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -9,7 +12,8 @@ function runApp() {
 	var button = new JButton("Done");
 
 	button.addActionListener( function() {
-		dispose();
+		//dispose();
+		close();
 	});
 
 	var panel = new JPanel();

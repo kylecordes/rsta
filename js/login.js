@@ -1,3 +1,8 @@
+// Rhino Swing Test Application
+// Copyright 2008 Kyle Cordes
+// http://kylecordes.com
+
+
 var layeredPane = new JLayeredPane();
 var dialog = new JDialog();
 var loggedIn = false;
@@ -22,8 +27,6 @@ var picWidth = 450;
 
 layeredPane.setPreferredSize(new Dimension(picWidth, picHeight));
 layeredPane.setBorder(BorderFactory.createEmptyBorder());
-
-
 
 function createImageIcon(path) {
 	var someClass = new Frame(); 
@@ -60,7 +63,7 @@ loginButton.setAction(okAction);
 layeredPane.add(loginButton, Integer.valueOf(10));
 
 layeredPane.setOpaque(true); // content panes must be opaque
-dialog.setTitle("Worldwide Momentum Login");
+dialog.setTitle("Rhino Swing Test Application - Login with any name/pw");
 dialog.setContentPane(layeredPane);
 dialog.pack();
 dialog.setLocationRelativeTo(null);
@@ -70,4 +73,3 @@ function login() {
 	dialog.setVisible(true);
 	return loggedIn;
 }
-

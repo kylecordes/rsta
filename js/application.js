@@ -1,10 +1,15 @@
-// Kyle's very basic Swing app
+// Rhino Swing Test Application
+// Copyright 2008 Kyle Cordes
+// http://kylecordes.com
+
+
+
 
 importPackage(Packages.javax.swing);
 importPackage(Packages.java.awt);
 importPackage(Packages.java.awt.event);
 
-var frame = new JFrame("Rhino Swing Test gApplication");
+var frame = new JFrame("Rhino Swing Test Application");
 frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 frame.setSize(300, 200);
 

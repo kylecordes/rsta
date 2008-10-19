@@ -1,3 +1,12 @@
+/* Rhino Swing Test Application
+ * Kyle Cordes
+ * http://kylecordes.com
+ *
+ * This is a wedge I created while experimenting
+ * with hooking JS handlers to Java classes.
+ */
+
+
 package com.kylecordes.rhinohack;
 
 import java.awt.event.ActionEvent;
