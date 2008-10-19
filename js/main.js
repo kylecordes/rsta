@@ -5,21 +5,38 @@
 function runApp() {
 	
 	var lframe = new JFrame("Rhine Swing Test Application - Main Screen");
-	lframe.setSize(500, 300);
+	lframe.setSize(500, 400);
 
 	lframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
-	var button = new JButton("Done");
+	var exitButton = new JButton("Done");
+	exitButton.addActionListener( function() {
+		java.lang.System.exit(0);
+	});
 
-	button.addActionListener( function() {
-		//dispose();
-		close();
+	var labelPrefix = "Clicks: ";
+	var numClicks = 0;
+	var label = new JLabel(labelPrefix + numClicks);
+	var countButton = new JButton("Count Another Click");
+	countButton.mnemonic = KeyEvent.VK_I;
+
+	countButton.addActionListener( function() {
+		numClicks += 1;
+		label.setText(labelPrefix + numClicks);
 	});
 
 	var panel = new JPanel();
 	panel.border = BorderFactory.createEmptyBorder(30, 30, 10, 30);
-	panel.setLayout(new java.awt.GridLayout(0, 1));
-	panel.add(button);
+	panel.setLayout(new java.awt.GridLayout(0, 2, 10, 10));
+
+	panel.add(label);
+	panel.add(countButton);
+
+	panel.add(new JLabel("Whizbang animation:"));
+	panel.add(new JButton("Lets' do it"));
+
+	panel.add(new JLabel("Done yet?"));
+	panel.add(exitButton);
 
 	lframe.add(panel);
 	lframe.pack();
