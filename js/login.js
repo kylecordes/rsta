@@ -30,18 +30,17 @@ function login() {
 	layeredPane.setBorder(BorderFactory.createEmptyBorder());
 
 	function createImageIcon(path) {
-		var someClass = new Frame(); 
-		someClass = someClass.getClass();
-		var imgURL = someClass.getResource(path);
+		var loader = java.lang.Thread.currentThread().getContextClassLoader(); 
+		var imgURL = loader.getResource(path);
 		if (imgURL != null) {
 			return new ImageIcon(imgURL);
 		} else {
 			intf.print("Couldn't find file: " + path);
-			return null;
+			return new ImageIcon();
 		}
 	}
 
-	var image = createImageIcon("/logo.jpg");
+	var image = createImageIcon("logo.jpg");
 	var picture = new JLabel(image);
 	picture.setBounds(0, 0, picWidth, 260);
 	layeredPane.add(picture);

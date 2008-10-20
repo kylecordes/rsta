@@ -50,6 +50,8 @@ function createWorkOrderPanel(_workOrder) {
 function Slots(_layeredPane) {
 	var layeredPane = _layeredPane;
 	var points = [];
+	
+	// I wrote these as consts in Java, no const in JS.
 	var LEFT_MARGIN = 30;
 	var TOP_MARGIN = 3;
 	var RIGHT_MARGIN = 3;
@@ -146,6 +148,11 @@ Array.prototype.insert = function( i, v ) {
 }
 
 function _OrderingWidget() {
+	
+	// var is good enough for private variables only
+	// accessed by functions in this block. Use "this." for publics
+	// or other variables you need to access outside this block.
+	
 	var panels = [];
 	var dragging;
 	var grabXoffset;
@@ -156,7 +163,7 @@ function _OrderingWidget() {
 	var moveTimer;
 
 	scrollPane.setBorder(BorderFactory.createEmptyBorder());
-	scrollPane.setPreferredSize(new Dimension(500, 400));
+	scrollPane.setPreferredSize(new Dimension(800, 500));
 	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
 	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
 
@@ -168,21 +175,19 @@ function _OrderingWidget() {
         }
     });
 
-    moveTimer = new javax.swing.Timer(25, function() {
+    moveTimer = new javax.swing.Timer(20, function() {
     	parent.driftPositions();
     });
     
 	// **************** Mouse Event Handlers ******************
 	
     this.setupHandlers = function() {
+    	// This must be called after my prototype is set by the JavaAdapter constructor,
+    	// so that parent methods like addMouseListener are found.
     	layeredPane.addMouseListener(this);
     	layeredPane.addMouseMotionListener(this);
     }
     
-	//public void mouseEntered(MouseEvent e) {
-	//public void mouseExited(MouseEvent e) {
-	//public void mouseMoved(MouseEvent e) {
-
 	this.mousePressed = function(e) {
 		var c = layeredPane.getComponentAt(e.getPoint());
 		if (c instanceof JPanel) {
@@ -258,7 +263,7 @@ function _OrderingWidget() {
 
 	function closerCoord(current, target) {
 		var gap = Math.abs(target - current);
-		var increment = Math.ceil(0.1 * gap);
+		var increment = Math.ceil(0.12 * gap);
 		if (current > target) {
 			return current - increment;
 		} else {
@@ -297,6 +302,8 @@ function _OrderingWidget() {
 }
 
 function createOrderingWidget() {
+	// This is the way I found to subclass a Java class.  It is ugly, but works.
+	// Rhino gurus probably have a better way.
 	var ow = new JavaAdapter(MouseListener, MouseMotionListener, new _OrderingWidget());
 	ow.setupHandlers();
 	return ow;
