@@ -10,19 +10,29 @@ function runApp() {
 	lframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	
 	var exitButton = new JButton("Done");
+	
+	// Rhino magic: pass a Javascript closure, it gets turned in to an anonymous class
+	// with the right interface and method signature.
 	exitButton.addActionListener( function() {
 		java.lang.System.exit(0);
 	});
 
 	var labelPrefix = "Clicks: ";
 	var numClicks = 0;
-	var label = new JLabel(labelPrefix + numClicks);
+	var label = new JLabel();
+	
+	// Define a function whereever you feel like it.
+	function updateCountLabel() {
+		label.setText(labelPrefix + numClicks);
+	}
+	
+	updateCountLabel();
 	var countButton = new JButton("Count Another Click");
 	countButton.mnemonic = KeyEvent.VK_I;
 
 	countButton.addActionListener( function() {
 		numClicks += 1;
-		label.setText(labelPrefix + numClicks);
+		updateCountLabel();
 	});
 
 	var panel = new JPanel();
@@ -33,7 +43,13 @@ function runApp() {
 	panel.add(countButton);
 
 	panel.add(new JLabel("Whizbang animation:"));
-	panel.add(new JButton("Lets' do it"));
+
+	var goButton = new JButton("Lets' do it");
+	goButton.addActionListener( function() {
+		animationDemo();
+	});
+	
+	panel.add(goButton);
 
 	panel.add(new JLabel("Done yet?"));
 	panel.add(exitButton);
