@@ -2,7 +2,6 @@
 // Copyright 2008 Kyle Cordes
 // http://kylecordes.com
 
-
 var lastNames = [ "Abrew", "ACKERMAN", "ACTON",
 		"Adams", "ADAMS", "Agresto", "Aguilar", "Albertson", "Allen",
 		"Alverman", "Alvila", "AMMANN", "Andrews", "ANDREWS", "ARAGON",

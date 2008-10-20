@@ -11,6 +11,7 @@ importPackage(Packages.java.awt.event);
 importPackage(Packages.java.awt);
 importPackage(Packages.java.util);
 
+importClass(Packages.java.beans.EventHandler);
 
 intf.load("login.js");
 intf.load("main.js");
@@ -21,21 +22,8 @@ intf.load("flying.js");
 // This works fine with JGoodies Looks:
 // UIManager.setLookAndFeel("com.jgoodies.looks.plastic.PlasticLookAndFeel");
 
-/*
 if(login()) {
 	runApp();
 } else {
 	java.lang.System.exit(0);
 }
-*/
-
-var w1 = new WorkOrder(1, "123 mwm", "staplet", 2);
-
-var lframe = new JFrame("dummy");
-lframe.setSize(500, 400);
-lframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-var panel =createWorkOrderPanel(w1); 
-lframe.add(panel);
-lframe.pack();
-lframe.show();
-
