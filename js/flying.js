@@ -326,7 +326,7 @@ function animationDemo() {
 	}
 
 	function createAndShowGUI() {
-		var frame = new JFrame("Rhine Swing Test Application - Animated Drag Drop Demo");
+		var frame = new JFrame("Rhino Swing Test Application - Animated Drag Drop Demo");
 		var panel = new JPanel(new BorderLayout());
 		var topLabel = new JLabel("Drag and drop the work orders below.");
 		topLabel.setBorder(BorderFactory.createEmptyBorder(3, 3, 3, 3));
